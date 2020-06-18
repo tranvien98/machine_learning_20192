@@ -177,6 +177,18 @@ class MF(object):
 
         return total
 
+    def save_weight(self, path_W, path_X):
+
+        self.W.dump(path_W)
+        self.X.dump(path_X)
+    
+    def load_weight(self, path_W, path_X):
+        W = np.load(path_W, allow_pickle=True )
+        X = np.load(path_X, allow_pickle=True )
+
+        self.W = W
+        self.X = X
+
 r_cols = ['user_id', 'movie_id', 'rating', 'unix_timestamp']
 
 ratings_base = pd.read_csv('./data/train.csv', names=r_cols, encoding='latin-1')
@@ -192,8 +204,9 @@ rs = MF(rate_train, K = 10, lam = .1, print_every = 10,
     learning_rate = 0.75, max_iter = 100, user_based = 1)
 rs.fit()
 
-rs.W.dump("W.dat")
-rs.X.dump("X.dat")
+rs.save_weight("./W.dat", "./X.dat")
+
+rs.load_weight("./W.dat", "./X.dat")
 # evaluate on test data
 print(rs.evaluate(rate_test))
 # print(rs.pred_for_user(1))
