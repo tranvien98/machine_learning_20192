@@ -191,6 +191,9 @@ rate_test[:, :2] -= 1
 rs = MF(rate_train, K = 10, lam = .1, print_every = 10, 
     learning_rate = 0.75, max_iter = 100, user_based = 1)
 rs.fit()
+
+rs.W.dump("W.dat")
+rs.X.dump("X.dat")
 # evaluate on test data
 print(rs.evaluate(rate_test))
 # print(rs.pred_for_user(1))

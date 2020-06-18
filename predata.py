@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 r_cols = ['user_id', 'movie_id', 'rating', 'unix_timestamp']
-ratings_base = pd.read_csv('./ml-1m/ratings.dat', sep='::', names=r_cols, encoding='latin-1')
+ratings_base = pd.read_csv('./ml-100k/u.data', sep='\t', names=r_cols, encoding='latin-1')
 ratings_base = ratings_base.sort_values(['user_id', 'unix_timestamp'], ascending=[True, True])
 # print(ratings_base.head(150))
 df_train = pd.DataFrame(columns=r_cols)
